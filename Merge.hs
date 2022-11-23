@@ -22,10 +22,21 @@ module Merge where
 
     --diese aufgabe hat mich viel zu lang gebraucht
 
-    primepowers :: Int -> [Integer]
-    primepowers n = take n (foldl (\a b -> merge b a) [] ( take n (getMultipliedPrimeLists n)))
+    -- primepowers :: Int -> [Integer]
+    -- primepowers n = foldl merge [] ( (getMultipliedPrimeLists n))
 
-    getMultipliedPrimeLists :: Integral b => b -> [[Integer]]
-    getMultipliedPrimeLists n =  map (\list->map (\tuple->(fst tuple) ^ (snd tuple)) list) (( map (\x->(zip (same x) [1..n])) primes))
+    -- recursiveThingy listOfLists = 
+
+    -- getMultipliedPrimeLists :: Integral b => b -> [[Integer]]
+    -- getMultipliedPrimeLists n =  map (\list->map (\tuple->(fst tuple) ^ (snd tuple)) list) (( map (\x->(zip (same x) [1..n])) primes))
     
+    -- getSecondMultipliedPrimeLists n = (map (\nbr->drop (nbr-1) primes) [1..n])
 
+    -- primepowers n = (getSecondMultipliedPrimeLists n)
+
+    primepowers :: Int -> [Int]
+    primepowers n = foldl merge [] (map primepowerlist [1..n])
+--primepowers n = foldl merge [] (map (take n . primepowerlist) primes)
+
+    primepowerlist :: Int -> [Int]
+    primepowerlist n = map (^n) primes
